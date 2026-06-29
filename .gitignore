@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# build files
+dist/
+build/
+
+# cache
+.cache/
+.vite/
+
+# env files
+.env
+
+# logs
+*.log
+
+# user-uploaded images (server/uploads) — keep the folder, ignore its contents
+server/uploads/*
+!server/uploads/.gitkeep

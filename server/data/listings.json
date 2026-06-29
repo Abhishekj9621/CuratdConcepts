@@ -1,0 +1,34 @@
+[
+  {
+    "id": 6,
+    "name": "Nirvana",
+    "type": "Homestay",
+    "location": "Udaipur, Rajasthan",
+    "guests": 0,
+    "bedrooms": 6,
+    "bathrooms": 6,
+    "price": 1491,
+    "rating": 4.8,
+    "reviews": 37,
+    "images": [
+      "http://localhost:5000/uploads/1782708460034-83c0685dfc111c6f.png",
+      "http://localhost:5000/uploads/1782708549930-df7c7034e285d8f0.png"
+    ],
+    "amenities": [
+      "Private Rooms"
+    ],
+    "platforms": [
+      "Airbnb",
+      "Booking.com",
+      "MakeMyTrip"
+    ],
+    "platformLinks": {
+      "Airbnb": "https://www.google.com",
+      "Booking.com": "",
+      "MakeMyTrip": ""
+    },
+    "description": "",
+    "createdAt": "2026-06-28T20:11:21.867Z",
+    "updatedAt": "2026-06-29T06:56:27.608Z"
+  }
+]
