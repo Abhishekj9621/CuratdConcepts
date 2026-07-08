@@ -1,0 +1,165 @@
+/* ─── Curatd Concepts – Global Styles ─────────────────────────────────────── */
+
+:root {
+  /* ── Brand Colors (from logo) ── */
+  --red:          #E8302A;
+  --orange:       #F4823A;
+  --amber:        #F5A623;
+  --red-orange:   #EF5A2E;   /* midpoint gradient — primary accent */
+
+  /* ── Backgrounds ── */
+  --dark:         #0E0E0E;   /* near-black, like logo background */
+  --charcoal:     #1A1A1A;   /* cards, footer */
+  --surface:      #222222;   /* elevated dark surfaces */
+  --warm-white:   #FDF8F4;   /* page background — warm off-white */
+  --cream:        #FAF3EC;   /* section alt background */
+
+  /* ── Text ── */
+  --text-primary:   #1A1A1A;   /* on light backgrounds */
+  --text-secondary: #5C5047;   /* muted text on light */
+  --text-on-dark:   #FAF3EC;   /* on dark backgrounds */
+  --text-muted-dark: rgba(250, 243, 236, 0.55); /* muted on dark */
+
+  /* ── UI ── */
+  --border:       rgba(26, 26, 26, 0.1);
+  --border-dark:  rgba(250, 243, 236, 0.1);
+  --muted:        #5C5047;
+
+  /* ── Gradients ── */
+  --gradient-brand: linear-gradient(135deg, var(--red) 0%, var(--orange) 60%, var(--amber) 100%);
+  --gradient-dark:  linear-gradient(135deg, #0E0E0E 0%, #1c1208 100%);
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 2px 12px rgba(232, 48, 42, 0.08);
+  --shadow-md:  0 8px 32px rgba(232, 48, 42, 0.12);
+  --shadow-lg:  0 20px 60px rgba(232, 48, 42, 0.18);
+
+  /* ── Misc ── */
+  --radius:     12px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* ── Legacy aliases (keeps existing components working) ── */
+  --gold:         var(--amber);
+  --gold-light:   #F8C46A;
+  --terracotta:   var(--red-orange);
+  --sage:         #7a9e7e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--warm-white);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gradient-brand);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(232, 48, 42, 0.3);
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+  box-shadow: 0 6px 24px rgba(232, 48, 42, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--red-orange);
+  padding: 13px 28px;
+  border: 1.5px solid var(--red-orange);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: var(--gradient-brand);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(232, 48, 42, 0.3);
+}
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
+
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red-orange);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}

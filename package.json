@@ -1,0 +1,10 @@
+{
+  "name": "curatd-concepts",
+  "version": "2.0.0",
+  "description": "Curatd Concepts - public property marketing site (static React app, no backend of its own — reads and writes go straight to the NovaStay HMS's public API)",
+  "scripts": {
+    "install-all": "cd client && npm install",
+    "dev": "cd client && npm start",
+    "build": "cd client && npm run build"
+  }
+}
