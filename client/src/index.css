@@ -1,0 +1,306 @@
+/* ─── Curatd Concepts — Design System ──────────────────────────────────────
+   Modern, product-grade hospitality brand: gradient-led hero moments,
+   glassmorphic surfaces, bento-style modular grids, pill-shaped controls.
+   No themed motif — clean, current, confident. ── */
+
+:root {
+  /* ── Base ── */
+  --cloud:      #F7F7F5;   /* page background */
+  --paper:      #FFFFFF;   /* card surfaces */
+  --noir:       #0B0B0C;   /* true near-black — dark sections, nav */
+  --noir-soft:  #18181C;   /* elevated dark surface */
+  --ink:        #17171B;   /* body text on light */
+  --mist:       #6B6B74;   /* muted text */
+  --line:       rgba(23, 23, 27, 0.1);
+  --line-dark:  rgba(255, 255, 255, 0.13);
+
+  /* ── Brand gradient — used with confidence, the hero signature ── */
+  --red:    #E8302A;
+  --orange: #F4823A;
+  --amber:  #F5A623;
+  --gradient-brand:      linear-gradient(135deg, var(--red) 0%, var(--orange) 55%, var(--amber) 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(232,48,42,0.13), rgba(244,130,58,0.13) 55%, rgba(245,166,35,0.13));
+  --gradient-dark:       linear-gradient(160deg, #0B0B0C 0%, #241209 100%);
+
+  /* ── Glass surfaces ── */
+  --glass-bg:        rgba(255, 255, 255, 0.66);
+  --glass-border:    rgba(255, 255, 255, 0.6);
+
+  /* ── Radii — soft, modern, pill-forward ── */
+  --radius-sm:   14px;
+  --radius-md:   22px;
+  --radius-lg:   32px;
+  --radius-pill: 999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:   0 2px 10px rgba(11, 11, 12, 0.06);
+  --shadow-md:   0 12px 32px rgba(11, 11, 12, 0.1);
+  --shadow-lg:   0 28px 70px rgba(11, 11, 12, 0.18);
+  --shadow-glow: 0 10px 36px rgba(232, 48, 42, 0.3);
+
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Typography ──
+     Bricolage Grotesque: expressive, current display face — headlines only.
+     Sora: clean geometric-warm body/UI face. */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body:    'Sora', system-ui, sans-serif;
+
+  /* ── Legacy aliases — keep every existing component resolving sanely ── */
+  --dark:            var(--noir);
+  --charcoal:        var(--noir);
+  --surface:         var(--noir-soft);
+  --warm-white:      var(--cloud);
+  --cream:           var(--paper);
+  --gold:            var(--amber);
+  --gold-light:      var(--orange);
+  --terracotta:      var(--red);
+  --red-orange:      var(--orange);
+  --sage:            #7a9e7e;
+  --text-primary:    var(--ink);
+  --text-secondary:  var(--mist);
+  --text-on-dark:    #F2F2F0;
+  --text-muted-dark: rgba(242, 242, 240, 0.62);
+  --border:          var(--line);
+  --border-dark:     var(--line-dark);
+  --muted:           var(--mist);
+  --radius:          var(--radius-sm);
+  --font-mono:       var(--font-body);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Mobile browsers (Chrome/Android, and older Safari) draw a solid
+     grey/blue highlight rectangle over the tapped element by default.
+     Turned off here; interactive elements get an intentional :active
+     press-state below instead, so touch feedback isn't just removed. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cloud);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+input,
+textarea,
+select,
+[role="button"],
+[role="tab"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Buttons — pill-shaped, gradient-forward, real depth ────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--noir);
+  color: #fff;
+  padding: 16px 30px;
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: var(--transition);
+  box-shadow: 0 2px 0 rgba(255,255,255,0.06) inset, 0 8px 20px rgba(11,11,12,0.18);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0 rgba(255,255,255,0.08) inset, 0 14px 30px rgba(11,11,12,0.26);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn-primary.btn-jewel {
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary.btn-jewel:hover {
+  box-shadow: 0 16px 44px rgba(232, 48, 42, 0.4);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--ink);
+  padding: 15px 28px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ─── Structural utilities ────────────────────────────────────────────────── */
+
+/* Small pill eyebrow label — replaces plain uppercase text everywhere */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 6px 16px 6px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-label::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Gradient text — the hero signature, used sparingly on key words */
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Glass card — frosted floating surface */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Soft gradient mesh blobs — ambient atmosphere behind hero/CTA sections */
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mesh-bg::before,
+.mesh-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+}
+
+.mesh-bg::before {
+  width: 46vw;
+  height: 46vw;
+  background: var(--red);
+  top: -18%;
+  left: -12%;
+  opacity: 0.28;
+}
+
+.mesh-bg::after {
+  width: 40vw;
+  height: 40vw;
+  background: var(--amber);
+  bottom: -16%;
+  right: -10%;
+  opacity: 0.24;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}

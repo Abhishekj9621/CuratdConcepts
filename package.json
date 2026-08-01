@@ -1,0 +1,10 @@
+{
+  "name": "curatd-concepts",
+  "version": "2.0.0",
+  "description": "Curatd Concepts - public property marketing site (static React app; property data lives in client/src/data/listings.js, contact form sends via Web3Forms)",
+  "scripts": {
+    "install-all": "cd client && npm install",
+    "dev": "cd client && npm start",
+    "build": "cd client && npm run build"
+  }
+}

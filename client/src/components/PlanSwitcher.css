@@ -1,0 +1,202 @@
+.plan-switcher {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+/* ─── Segmented toggle ────────────────────────────────────────────────────── */
+.plan-toggle {
+  position: relative;
+  display: flex;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 6px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 28px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.plan-toggle-highlight {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 6px);
+  height: calc(100% - 12px);
+  border-radius: var(--radius-pill);
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.plan-toggle-btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  padding: 13px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--mist);
+  border-radius: var(--radius-pill);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.plan-toggle-btn.active {
+  color: #fff;
+}
+
+/* ─── Plan card ───────────────────────────────────────────────────────────── */
+.plan-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+  animation: plan-card-in 0.4s ease both;
+}
+
+@keyframes plan-card-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.plan-card--accent {
+  background: var(--gradient-dark);
+  border-color: transparent;
+  color: var(--text-on-dark);
+}
+
+.plan-card-badge {
+  position: absolute;
+  top: -14px;
+  right: 40px;
+  background: var(--gradient-brand);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 7px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-glow);
+}
+
+.plan-card-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.plan-card-tagline {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.plan-card--accent .plan-card-tagline {
+  color: var(--amber);
+}
+
+.plan-card-title {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.plan-card--accent .plan-card-title {
+  color: var(--text-on-dark);
+}
+
+.plan-card-desc {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--mist);
+  margin-bottom: 28px;
+}
+
+.plan-card--accent .plan-card-desc {
+  color: rgba(242, 242, 240, 0.7);
+}
+
+.plan-card-cta {
+  width: fit-content;
+}
+
+.plan-card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 32px;
+  border-left: 1px solid var(--line);
+}
+
+.plan-card--accent .plan-card-features {
+  border-left-color: var(--line-dark);
+}
+
+.plan-card-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.94rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.plan-card--accent .plan-card-features li {
+  color: rgba(242, 242, 240, 0.92);
+}
+
+.plan-feature-icon {
+  color: var(--orange);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.plan-card--accent .plan-feature-icon {
+  color: var(--amber);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .plan-toggle {
+    max-width: 100%;
+  }
+
+  .plan-card {
+    padding: 32px 24px;
+  }
+
+  .plan-card-badge {
+    right: 24px;
+  }
+
+  .plan-card-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .plan-card-features {
+    padding-left: 0;
+    padding-top: 24px;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .plan-card--accent .plan-card-features {
+    border-top-color: var(--line-dark);
+  }
+
+  .plan-card-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,1018 @@
+.listings__hero {
+  position: relative;
+  height: 52vh;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 64px;
+}
+
+.listings__hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.listings__hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listings__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11,11,12,0.78) 0%, rgba(11,11,12,0.15) 100%);
+}
+
+.listings__hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.listings__hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  margin: 10px 0 12px;
+}
+
+.listings__hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ─── Filters ────────────────────────────────────────────────────────────── */
+.listings__filters-bar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 88px;
+  z-index: 100;
+}
+
+/* On short viewports (landscape phones, small browser windows) a sticky
+   bar this tall would permanently cover a big share of the screen and
+   can sit over the card grid beneath it. Let it scroll normally there
+   instead of staying pinned. */
+@media (max-height: 500px) {
+  .listings__filters-bar {
+    position: static;
+  }
+}
+
+.listings__filters-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+/* Property type — the primary filter, horizontally scrollable so it never
+   wraps into multiple rows (that was eating the whole screen on mobile). */
+.listings__filter-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-width: 0;
+  flex: 1;
+  mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent 100%);
+}
+
+.listings__filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.listings__filter-tab {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  transition: var(--transition);
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.listings__filter-tab:hover {
+  border-color: var(--ink);
+}
+
+.listings__filter-tab.active {
+  background: var(--gradient-brand);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-glow);
+}
+
+/* Sort — secondary filter, compact combined label+select pill */
+.listings__filters-right {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.listings__select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  transition: var(--transition);
+}
+
+.listings__select-wrap:hover {
+  border-color: var(--ink);
+}
+
+.listings__select-wrap label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--mist);
+  white-space: nowrap;
+}
+
+.listings__select-wrap select {
+  border: none;
+  background: transparent;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  outline: none;
+  max-width: 160px;
+}
+
+/* Results count + clear filters */
+.listings__filters-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+
+.listings__count {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.listings__clear-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--red);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(232, 48, 42, 0.25);
+  background: rgba(232, 48, 42, 0.06);
+  transition: var(--transition);
+}
+
+.listings__clear-filters:hover {
+  background: rgba(232, 48, 42, 0.12);
+  border-color: rgba(232, 48, 42, 0.4);
+}
+
+/* ─── Grid ───────────────────────────────────────────────────────────────── */
+.listings__grid-section {
+  padding: 48px 0 100px;
+}
+
+.listings__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.listings__empty {
+  text-align: center;
+  padding: 80px 0;
+  color: var(--muted);
+}
+
+.listings__empty span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* ─── Listing Card ───────────────────────────────────────────────────────── */
+/* display:flex + the body taking flex:1 with its footer pushed to
+   margin-top:auto is what keeps every card's price/button row aligned
+   along the bottom of a row, even when descriptions/amenities vary in
+   length — this is what fixes cards looking uneven or "cut" before. */
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.listing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.listing-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--cloud);
+  flex-shrink: 0;
+}
+
+.listing-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.listing-card:hover .listing-card__image img {
+  transform: scale(1.05);
+}
+
+.listing-card__badges {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 6px;
+  max-width: calc(100% - 28px);
+}
+
+.listing-card__type {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 5px 13px;
+  border-radius: var(--radius-pill);
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listing-card__platforms {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: flex;
+  gap: 4px;
+}
+
+.listing-card__platform-badge {
+  background: #FF5A5F;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.02em;
+}
+
+.listing-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.listing-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.listing-card__star {
+  color: var(--gold);
+}
+
+.listing-card__reviews {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.listing-card__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--charcoal);
+  overflow-wrap: anywhere;
+}
+
+.listing-card__location {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.listing-card__desc {
+  font-size: 0.85rem;
+  color: #5a5a5a;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.listing-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.listing-card__amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.listing-card__amenities span {
+  background: var(--cream);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: var(--charcoal);
+}
+
+.listing-card__book-modes {
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+/* Pushed to the bottom of the card body regardless of how much content
+   sits above it, via margin-top:auto — this is the key fix that keeps
+   every card's footer aligned across a row. */
+.listing-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.listing-card__price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.listing-card__per {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.listing-card__btn {
+  font-size: 0.78rem;
+  padding: 10px 16px;
+  flex-shrink: 0;
+}
+
+/* ───────────────── Modal Overlay ───────────────── */
+
+.listings__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ───────────────── Modal Container ───────────────── */
+
+.listings__modal {
+  background: var(--paper);
+  width: 100%;
+  max-width: 560px;
+
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border-radius: var(--radius-lg);
+
+  position: relative;
+
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.18);
+
+  animation: modal-enter .2s ease;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ───────────────── Close Button ───────────────── */
+
+.listings__modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0,0,0,0.65);
+  color: white;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ───────────────── Content ───────────────── */
+
+.listings__modal-body {
+  padding: 18px 22px 22px;
+}
+
+/* ───────────────── Type ───────────────── */
+
+.listings__modal-type {
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: var(--gold);
+
+  margin-bottom: 8px;
+}
+
+/* ───────────────── Rating ───────────────── */
+
+.listings__modal-rating {
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 10px;
+}
+
+/* ───────────────── Title ───────────────── */
+
+.listings__modal-body h2 {
+  font-size: 1.5rem;
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+/* ───────────────── Location ───────────────── */
+
+.listings__modal-location {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* ───────────────── Description (with Read more/less) ───────────────── */
+
+.listings__modal-desc-wrap {
+  margin-bottom: 20px;
+}
+
+.listings__modal-desc {
+  font-size: .95rem;
+  line-height: 1.7;
+  color: #555;
+  overflow-wrap: anywhere;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.listings__modal-desc.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.listings__modal-desc-toggle {
+  margin-top: 6px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--red-orange, var(--gold));
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.listings__modal-desc-toggle:hover {
+  text-decoration: underline;
+}
+
+/* ───────────────── Stats ───────────────── */
+
+.listings__modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 14px 0;
+  margin-bottom: 16px;
+}
+
+/* ───────────────── Amenities ───────────────── */
+
+.listings__modal-amenities {
+  margin-bottom: 18px;
+}
+
+.listings__modal-amenities strong {
+  display: block;
+
+  font-size: .8rem;
+  font-weight: 700;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  margin-bottom: 10px;
+}
+
+.listings__modal-amenity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.listings__modal-amenity-list span {
+  background: var(--cream);
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: .8rem;
+}
+
+/* ───────────────── Booking: Entire Property + Individual Rooms ───────── */
+
+.listings__modal-booking {
+  margin-bottom: 18px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.listings__modal-booking > strong {
+  display: block;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 16px 0 12px;
+}
+
+.listings__modal-book-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.listings__modal-book-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.listings__modal-book-option-label {
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.listings__modal-book-option-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.listings__modal-book-option-price small {
+  font-size: .72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.listings__modal-book-option-note {
+  font-size: .8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.listings__modal-rooms-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.listings__modal-roomtypes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.listings__modal-roomtype-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.listings__modal-roomtype-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.listings__modal-roomtype-name {
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+.listings__modal-ac-badge {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.listings__modal-ac-badge.is-ac {
+  background: rgba(122, 158, 126, 0.15);
+  color: #3f6b43;
+}
+
+.listings__modal-ac-badge.is-non-ac {
+  background: var(--cream);
+  color: var(--text-secondary);
+}
+
+.listings__modal-roomtype-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: .8rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.listings__modal-roomtype-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.listings__modal-roomtype-amenities span {
+  background: var(--cream);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+}
+
+.listings__modal-roomtype-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.listings__modal-roomtype-price {
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+.listings__modal-roomtype-price small {
+  font-size: .68rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.listings__modal-price-note {
+  font-size: .75rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 14px;
+}
+
+/* Airbnb-branded booking buttons */
+.listings__modal-airbnb-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+  background: #FF5A5F;
+  color: #fff;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.listings__modal-airbnb-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.listings__modal-airbnb-btn--sm {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+/* ───────────────── Footer (secondary contact option) ───────────────── */
+
+.listings__modal-footer {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.listings__modal-enquire-link {
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.listings__modal-enquire-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .listings__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .listings__filters-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-top: 14px;
+  }
+
+  .listings__filter-scroll {
+    margin: 0;
+    padding: 0;
+  }
+
+  .listings__filters-right {
+    justify-content: stretch;
+  }
+
+  .listings__select-wrap {
+    justify-content: center;
+  }
+
+  .listings__filters-meta {
+    padding-bottom: 14px;
+  }
+
+  .listings__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Modal — mobile (bottom-sheet style, more compact) ──────────────────── */
+@media (max-width: 640px) {
+  .listings__modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .listings__modal {
+    max-width: 100%;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    animation: modal-enter-mobile .2s ease;
+  }
+
+  .listings__modal-close {
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .listings__modal-body {
+    padding: 16px 18px 20px;
+  }
+
+  .listings__modal-body h2 {
+    font-size: 1.3rem;
+  }
+
+  .listings__modal-location {
+    margin-bottom: 14px;
+  }
+
+  .listings__modal-meta {
+    gap: 12px 16px;
+    padding: 10px 0;
+    margin-bottom: 12px;
+  }
+
+  .listings__modal-desc {
+    font-size: .88rem;
+  }
+
+  .listings__modal-amenities,
+  .listings__modal-booking {
+    margin-bottom: 14px;
+  }
+
+  .listings__modal-book-option {
+    padding: 12px 14px;
+  }
+
+  .listings__modal-book-option,
+  .listings__modal-roomtype-footer {
+    justify-content: flex-start;
+  }
+
+  .listings__modal-airbnb-btn {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@keyframes modal-enter-mobile {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Photo count badge on listing card ─────────────────────────────────── */
+.listing-card__img-count {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(11,11,12,0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* ─── Modal gallery ──────────────────────────────────────────────────────── */
+.listings__modal-gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.listings__modal-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.listings__modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.listings__modal-image--empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.listings__modal-thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #f5f5f5;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.listings__modal-thumb {
+  flex-shrink: 0;
+  width: 46px;
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition: border-color 0.15s;
+}
+
+.listings__modal-thumb.active {
+  border-color: var(--red-orange);
+}
+
+.listings__modal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
