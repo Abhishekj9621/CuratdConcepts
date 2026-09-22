@@ -1,0 +1,42 @@
+.notfound {
+  position: relative;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding: 148px 0 100px;
+}
+
+.notfound__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.notfound__title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-bottom: 18px;
+}
+
+.notfound__text {
+  font-size: 1.05rem;
+  color: var(--mist);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.notfound__ctas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .notfound {
+    padding: 116px 0 72px;
+  }
+}

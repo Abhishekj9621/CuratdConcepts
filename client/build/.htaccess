@@ -1,0 +1,25 @@
+# Required for client-side routing (React Router) on Apache/LiteSpeed hosting
+# such as Hostinger. Without this, refreshing or deep-linking to any route
+# other than "/" (e.g. /what-we-do, /about, /listings, /contact) returns the
+# host's own 404 page, because those paths aren't real files on the server —
+# they only exist once React's JavaScript takes over and handles the route.
+#
+# This rule tells the server: if the requested path isn't a real file or
+# directory, serve index.html instead (and let React Router figure out what
+# to show). It does NOT affect real files like images, css, js, or the
+# favicon — those are still served directly.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Don't rewrite index.html itself
+  RewriteRule ^index\.html$ - [L]
+
+  # If the request is for a real file or directory, serve it as-is
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Otherwise, hand it to index.html so React Router can take over
+  RewriteRule . /index.html [L]
+</IfModule>
